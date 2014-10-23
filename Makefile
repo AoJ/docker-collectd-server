@@ -7,7 +7,7 @@
 #	make try	- build and run in debug mode
 #	make remove	- discarding current running production container
 
-NAME=aooj/collectd
+NAME=aooj/collectd-client
 ID=collectd-client
 VERSION=1.0
 
