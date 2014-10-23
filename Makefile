@@ -10,25 +10,28 @@
 NAME=aooj/collectd
 ID=collectd-server
 VERSION=1.0
-
+RRD_DATA=rrd-data
 
 build:
 	docker build -t $(NAME):$(VERSION) .
 
 
 debug:
-	docker run  --entrypoint="/bin/bash" --rm -p 4567 -ti $(NAME):$(VERSION) -c /bin/bash
+	docker run  --entrypoint="/bin/bash" --rm -p 4567/udp -ti $(NAME):$(VERSION) -c /bin/bash
 
 remove:
 	docker kill $(ID) > /dev/null 2>&1
 	docker rm $(ID) > /dev/null 2>&1
 
+data:
+	docker run --name $(RRD_DATA) -v /data busybox
+
 run:
-	docker run -d -p 4567:4567 -h $(ID) --name $(ID) $(NAME):$(VERSION)
+	docker run -d -p 4567:4567/udp -h $(ID) --volumes-from $(RRD_DATA) --name $(ID) $(NAME):$(VERSION)
 
 
 try: build debug
 
 
-.PHONY: build debug try run remove
+.PHONY: build debug try run remove data
 
