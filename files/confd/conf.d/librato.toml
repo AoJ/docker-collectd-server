@@ -1,0 +1,5 @@
+[template]
+src = "auth_file.tmpl"
+dest = "/etc/collectd/auth_file"
+keys = [
+]
