@@ -17,7 +17,7 @@ build:
 
 
 debug:
-	docker run  --entrypoint="/bin/bash" --rm -ti $(NAME):$(VERSION) -c /bin/bash
+	docker run  --privileged=true -h host-test --entrypoint="/bin/bash" --rm -ti $(NAME):$(VERSION) -c /bin/bash
 
 try: build debug
 
