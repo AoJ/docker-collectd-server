@@ -1,4 +1,4 @@
-# Project: collectd client
+# Project: collectd host
 # Author: AooJ <aooj@n13.cz>
 # Date: 2014
 # usage:
@@ -7,8 +7,8 @@
 #	make try	- build and run in debug mode
 #	make remove	- discarding current running production container
 
-NAME=aooj/collectd-client
-ID=collectd-client
+NAME=aooj/collectd-host
+ID=collectd-host
 VERSION=1.0
 
 
@@ -17,7 +17,7 @@ build:
 
 
 debug:
-	docker run  --privileged=true -h host-test --entrypoint="/bin/bash" --rm -ti $(NAME):$(VERSION) -c /bin/bash
+	docker run  --privileged=true -h host-test3 --entrypoint="/bin/bash" --rm -ti -v /proc:/proc:ro -v /dev:/dev $(NAME):$(VERSION) -c /bin/bash
 
 try: build debug
 
